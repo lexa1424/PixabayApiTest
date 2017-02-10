@@ -12,14 +12,12 @@ import com.example.alexey.pixabayapitest.model.Category;
 import com.example.alexey.pixabayapitest.model.adapter.CategoryAdapter;
 import com.example.alexey.pixabayapitest.model.helper.Constans;
 
-/**
- * Created by Alexey on 05.02.2017.
- */
+
 
 public class CategoriesTab extends Fragment {
 
-    private RecyclerView recyclerView;
-    private CategoryAdapter categoryAdapter;
+    private RecyclerView mRecyclerView;
+    private CategoryAdapter mCategoryAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,6 +26,12 @@ public class CategoriesTab extends Fragment {
 
         configViews(rootView);
 
+        createCategories();
+
+        return rootView;
+    }
+
+    private void createCategories() {
         createCategory(Constans.CATEGORIES.ANIMALS, R.drawable.animals);
         createCategory(Constans.CATEGORIES.BUILDINGS, R.drawable.buildings);
         createCategory(Constans.CATEGORIES.BACKGROUNDS, R.drawable.backgrounds);
@@ -48,21 +52,27 @@ public class CategoriesTab extends Fragment {
         createCategory(Constans.CATEGORIES.SPORTS, R.drawable.sport);
         createCategory(Constans.CATEGORIES.TRANSPORTATION, R.drawable.transportation);
         createCategory(Constans.CATEGORIES.TRAVEL, R.drawable.travel);
-
-        return rootView;
     }
 
     private void createCategory(String name, int id) {
         Category category = new Category(name, id);
-        categoryAdapter.addCategory(category);
+        mCategoryAdapter.addCategory(category);
     }
 
     private void configViews(View view) {
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        categoryAdapter = new CategoryAdapter();
-        recyclerView.setAdapter(categoryAdapter);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mCategoryAdapter = new CategoryAdapter();
+        mRecyclerView.setAdapter(mCategoryAdapter);
     }
+
+//    @Override
+//    public void onClick(int position) {
+//        Category category = mCategoryAdapter.getSelectedCategory(position);
+//        Intent intent = new Intent(getActivity(), SelectedCategoryActivity.class);
+//        intent.putExtra(Constans.REFERENCE.CATEGORY, category.getName());
+//        startActivity(intent);
+//    }
 }

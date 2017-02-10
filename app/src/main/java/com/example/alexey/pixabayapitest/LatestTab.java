@@ -3,13 +3,11 @@ package com.example.alexey.pixabayapitest;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.alexey.pixabayapitest.controller.RestManager;
 import com.example.alexey.pixabayapitest.model.Image;
@@ -21,15 +19,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Alexey on 05.02.2017.
- */
+
 
 public class LatestTab extends Fragment {
 
-    private RecyclerView recyclerView;
-    private RestManager restManager;
-    private ImageAdapter imageAdapter;
+    private RecyclerView mRecyclerView;
+    private RestManager mRestManager;
+    private ImageAdapter mImageAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,7 +33,7 @@ public class LatestTab extends Fragment {
         View rootView = inflater.inflate(R.layout.latest_tab, container, false);
 
         configViews(rootView);
-        restManager = new RestManager();
+        mRestManager = new RestManager();
 
         getData();
 
@@ -45,7 +41,7 @@ public class LatestTab extends Fragment {
     }
 
     private void getData() {
-        Call<ImageList> imagesCall = restManager.getUserService().getImages(Constans.KEY, Constans.ORDER.LATEST);
+        Call<ImageList> imagesCall = mRestManager.getUserService().getImages(Constans.KEY, Constans.ORDER.LATEST);
         imagesCall.enqueue(new Callback<ImageList>() {
             @Override
             public void onResponse(Call<ImageList> call, Response<ImageList> response) {
@@ -53,7 +49,7 @@ public class LatestTab extends Fragment {
                     ImageList imageList = response.body();
                     for(int i = 0; i < imageList.getImages().size(); i++) {
                         Image image = imageList.getImages().get(i);
-                        imageAdapter.addImage(image);
+                        mImageAdapter.addImage(image);
                     }
                 }
             }
@@ -66,11 +62,11 @@ public class LatestTab extends Fragment {
     }
 
     private void configViews(View view) {
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        imageAdapter = new ImageAdapter();
-        recyclerView.setAdapter(imageAdapter);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mImageAdapter = new ImageAdapter();
+        mRecyclerView.setAdapter(mImageAdapter);
     }
 }

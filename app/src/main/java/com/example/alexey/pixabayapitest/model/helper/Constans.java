@@ -46,4 +46,12 @@ public class Constans {
         public static final String BUSINESS = "business";
         public static final String MUSIC = "music";
     }
+
+    public static final class REFERENCE {
+        public static final String CATEGORY = Config.PACKAGE_NAME + "category";
+    }
+
+    public static final class Config {
+        public static final String PACKAGE_NAME = "com.exemple.alexey.pixabayapitest.";
+    }
 }

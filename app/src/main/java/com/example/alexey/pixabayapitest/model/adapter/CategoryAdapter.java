@@ -1,5 +1,6 @@
 package com.example.alexey.pixabayapitest.model.adapter;
 
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,16 +8,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.alexey.pixabayapitest.CategoriesTab;
+import com.example.alexey.pixabayapitest.MainActivity;
 import com.example.alexey.pixabayapitest.R;
+import com.example.alexey.pixabayapitest.SelectedCategoryActivity;
 import com.example.alexey.pixabayapitest.model.Category;
 import com.example.alexey.pixabayapitest.model.Image;
+import com.example.alexey.pixabayapitest.model.helper.Constans;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Alexey on 06.02.2017.
- */
+
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder> {
 
@@ -49,7 +52,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
         notifyDataSetChanged();
     }
 
-    public class Holder extends RecyclerView.ViewHolder {
+    public Category getSelectedCategory(int position) {
+        return mCategories.get(position);
+    }
+
+    public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView mImage;
         private TextView mCategoryName;
@@ -59,6 +66,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
 
             mImage = (ImageView)itemView.findViewById(R.id.category_image);
             mCategoryName = (TextView) itemView.findViewById(R.id.category_name);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            int position = getAdapterPosition();
+            Category category = getSelectedCategory(position);
+            Intent intent = new Intent(v.getContext(), SelectedCategoryActivity.class);
+            intent.putExtra(Constans.REFERENCE.CATEGORY, category.getName());
+            v.getContext().startActivity(intent);
         }
     }
 }

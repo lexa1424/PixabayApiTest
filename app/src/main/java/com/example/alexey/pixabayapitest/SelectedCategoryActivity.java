@@ -1,13 +1,11 @@
 package com.example.alexey.pixabayapitest;
 
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.example.alexey.pixabayapitest.controller.RestManager;
 import com.example.alexey.pixabayapitest.model.Image;
@@ -19,29 +17,29 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-
-public class PopularTab extends Fragment{
+public class SelectedCategoryActivity extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
     private RestManager mRestManager;
     private ImageAdapter mImageAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.popular_tab, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_selected_category);
 
-        configViews(rootView);
+        Intent intent = getIntent();
+
+        String category = (String)intent.getSerializableExtra(Constans.REFERENCE.CATEGORY);
+
+        configViews();
         mRestManager = new RestManager();
 
-        getData();
-
-        return rootView;
+        getData(category);
     }
 
-    private void getData() {
-        Call<ImageList> imagesCall = mRestManager.getUserService().getImages(Constans.KEY, Constans.ORDER.POPULAR);
+    private void getData(String category) {
+        Call<ImageList> imagesCall = mRestManager.getUserService().getImages(Constans.KEY, Constans.ORDER.LATEST, category);
         imagesCall.enqueue(new Callback<ImageList>() {
             @Override
             public void onResponse(Call<ImageList> call, Response<ImageList> response) {
@@ -61,11 +59,11 @@ public class PopularTab extends Fragment{
         });
     }
 
-    private void configViews(View view) {
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.recycler_view);
+    private void configViews() {
+        mRecyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setRecycledViewPool(new RecyclerView.RecycledViewPool());
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         mImageAdapter = new ImageAdapter();
         mRecyclerView.setAdapter(mImageAdapter);
     }

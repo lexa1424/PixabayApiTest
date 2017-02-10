@@ -6,9 +6,7 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-/**
- * Created by Alexey on 26.01.2017.
- */
+
 
 public interface UserService {
 
@@ -22,5 +20,10 @@ public interface UserService {
     @GET("/api/")
     Call<ImageList> getImages(@Query("key") String key,
                               @Query("order") String order);
+
+    @GET("/api/")
+    Call<ImageList> getImages(@Query("key") String key,
+                              @Query("order") String order,
+                              @Query("category") String category);
 
 }

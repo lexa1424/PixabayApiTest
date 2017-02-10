@@ -2,6 +2,7 @@ package com.example.alexey.pixabayapitest.model.adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
         return mCategories.get(position);
     }
 
-    public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class Holder extends RecyclerView.ViewHolder {
 
         private ImageView mImage;
         private TextView mCategoryName;
@@ -66,16 +67,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Holder
 
             mImage = (ImageView)itemView.findViewById(R.id.category_image);
             mCategoryName = (TextView) itemView.findViewById(R.id.category_name);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            Category category = getSelectedCategory(position);
-            Intent intent = new Intent(v.getContext(), SelectedCategoryActivity.class);
-            intent.putExtra(Constans.REFERENCE.CATEGORY, category.getName());
-            v.getContext().startActivity(intent);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.alexey.pixabayapitest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import com.example.alexey.pixabayapitest.model.Category;
 import com.example.alexey.pixabayapitest.model.adapter.CategoryAdapter;
 import com.example.alexey.pixabayapitest.model.helper.Constans;
-
+import com.example.alexey.pixabayapitest.model.helper.RecyclerClickListener;
 
 
 public class CategoriesTab extends Fragment {
@@ -66,13 +67,21 @@ public class CategoriesTab extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mCategoryAdapter = new CategoryAdapter();
         mRecyclerView.setAdapter(mCategoryAdapter);
-    }
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerClickListener.RecyclerTouchListener(
+                        getContext(), mRecyclerView, new RecyclerClickListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Category category = mCategoryAdapter.getSelectedCategory(position);
+                Intent intent = new Intent(view.getContext(), SelectedCategoryActivity.class);
+                intent.putExtra(Constans.REFERENCE.CATEGORY, category.getName());
+                view.getContext().startActivity(intent);
+            }
 
-//    @Override
-//    public void onClick(int position) {
-//        Category category = mCategoryAdapter.getSelectedCategory(position);
-//        Intent intent = new Intent(getActivity(), SelectedCategoryActivity.class);
-//        intent.putExtra(Constans.REFERENCE.CATEGORY, category.getName());
-//        startActivity(intent);
-//    }
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.alexey.pixabayapitest;
+package com.example.alexey.pixabayapitest.ui.activity;
 
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.example.alexey.pixabayapitest.R;
 import com.example.alexey.pixabayapitest.model.adapter.SectionsPagerAdapter;
 
 import java.util.Random;

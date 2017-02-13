@@ -1,21 +1,14 @@
 package com.example.alexey.pixabayapitest.model.adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.alexey.pixabayapitest.CategoriesTab;
-import com.example.alexey.pixabayapitest.MainActivity;
 import com.example.alexey.pixabayapitest.R;
-import com.example.alexey.pixabayapitest.SelectedCategoryActivity;
 import com.example.alexey.pixabayapitest.model.Category;
-import com.example.alexey.pixabayapitest.model.Image;
-import com.example.alexey.pixabayapitest.model.helper.Constans;
 
 import java.util.ArrayList;
 import java.util.List;

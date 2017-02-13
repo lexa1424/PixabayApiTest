@@ -1,19 +1,28 @@
-package com.example.alexey.pixabayapitest;
+package com.example.alexey.pixabayapitest.ui.tabs;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexey.pixabayapitest.R;
 import com.example.alexey.pixabayapitest.controller.RestManager;
 import com.example.alexey.pixabayapitest.model.Image;
 import com.example.alexey.pixabayapitest.model.ImageList;
 import com.example.alexey.pixabayapitest.model.adapter.ImageAdapter;
 import com.example.alexey.pixabayapitest.model.helper.Constans;
+import com.example.alexey.pixabayapitest.model.helper.RecyclerClickListener;
+import com.example.alexey.pixabayapitest.ui.activity.MainActivity;
+import com.example.alexey.pixabayapitest.ui.activity.SelectedImageActivity;
+
+import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,5 +77,22 @@ public class LatestTab extends Fragment {
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mImageAdapter = new ImageAdapter();
         mRecyclerView.setAdapter(mImageAdapter);
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerClickListener.RecyclerTouchListener(
+                        getContext(), mRecyclerView, new RecyclerClickListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Image image = mImageAdapter.getSelectedImage(position);
+                Intent intent = new Intent(view.getContext(), SelectedImageActivity.class);
+                intent.putExtra(Constans.REFERENCE.IMAGE, image);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
     }
 }

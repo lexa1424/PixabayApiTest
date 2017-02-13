@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.alexey.pixabayapitest.CategoriesTab;
-import com.example.alexey.pixabayapitest.LatestTab;
-import com.example.alexey.pixabayapitest.PopularTab;
+import com.example.alexey.pixabayapitest.ui.tabs.CategoriesTab;
+import com.example.alexey.pixabayapitest.ui.tabs.LatestTab;
+import com.example.alexey.pixabayapitest.ui.tabs.PopularTab;
 
 /**
  * Created by Alexey on 05.02.2017.

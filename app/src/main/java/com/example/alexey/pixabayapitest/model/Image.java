@@ -3,11 +3,13 @@ package com.example.alexey.pixabayapitest.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Alexey on 30.01.2017.
  */
 
-public class Image {
+public class Image implements Serializable{
 
     @SerializedName("id")
     @Expose

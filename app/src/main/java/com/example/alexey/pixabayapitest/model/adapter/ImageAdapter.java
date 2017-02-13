@@ -50,6 +50,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.Holder> {
         return mImages.size();
     }
 
+    public Image getSelectedImage(int position) {
+        return mImages.get(position);
+    }
+
     public void addImage(Image image){
         mImages.add(image);
         notifyDataSetChanged();

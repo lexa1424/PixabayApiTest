@@ -49,6 +49,7 @@ public class Constans {
 
     public static final class REFERENCE {
         public static final String CATEGORY = Config.PACKAGE_NAME + "category";
+        public static final String IMAGE = Config.PACKAGE_NAME + "image";
     }
 
     public static final class Config {

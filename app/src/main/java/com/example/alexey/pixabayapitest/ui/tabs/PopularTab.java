@@ -1,4 +1,4 @@
-package com.example.alexey.pixabayapitest;
+package com.example.alexey.pixabayapitest.ui.tabs;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexey.pixabayapitest.R;
 import com.example.alexey.pixabayapitest.controller.RestManager;
 import com.example.alexey.pixabayapitest.model.Image;
 import com.example.alexey.pixabayapitest.model.ImageList;

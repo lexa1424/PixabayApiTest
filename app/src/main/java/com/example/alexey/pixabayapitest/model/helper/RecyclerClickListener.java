@@ -6,10 +6,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.alexey.pixabayapitest.CategoriesTab;
-import com.example.alexey.pixabayapitest.MainActivity;
-
-
 
 public class RecyclerClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.alexey.pixabayapitest;
+package com.example.alexey.pixabayapitest.ui.tabs;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alexey.pixabayapitest.R;
+import com.example.alexey.pixabayapitest.ui.activity.SelectedCategoryActivity;
 import com.example.alexey.pixabayapitest.model.Category;
 import com.example.alexey.pixabayapitest.model.adapter.CategoryAdapter;
 import com.example.alexey.pixabayapitest.model.helper.Constans;
